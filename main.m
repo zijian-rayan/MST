@@ -1,11 +1,11 @@
 clc;
 clear;
-close all;
+%close all;
 %%
 
 I=imread('Image_001.jpg');
  figure(1);
- subplot(1,3,1);
+
 imshow(I);
 
 
@@ -57,7 +57,7 @@ for l=1:lengthfile
     Y=[2,2];
     
 
-    while((Y(1)^2+Y(2)^2>0.5)&num<20)   
+    while((Y(1)^2+Y(2)^2>0.5)&&num<20)   
         num=num+1;
         temp1=imcrop(Im,rect);
         hist2=zeros(1,4096);
@@ -71,9 +71,9 @@ for l=1:lengthfile
             end
         end
         hist2=hist2*C;
-        
-        subplot(1,3,2);
-        plot(hist2);
+    figure(2);     
+        subplot(1,2,1);
+        plot(hist2,'b');
         title('Histogramme')
         hold on;
         
@@ -88,7 +88,7 @@ for l=1:lengthfile
        
         sum_w=0;
         xw=[0,0];
-        for i=1:a;
+        for i=1:a
             for j=1:b
                 sum_w=sum_w+w(uint32(q_temp1(i,j))+1);
                 xw=xw+w(uint32(q_temp1(i,j))+1)*[i-y(1)-0.5,j-y(2)-0.5];
@@ -110,7 +110,7 @@ for l=1:lengthfile
     v3=rect(3);
     v4=rect(4);
     %% result
-    subplot(1,3,3);
+    subplot(1,2,2);
     imshow(uint8(Im));
     title('result');
     hold on;
